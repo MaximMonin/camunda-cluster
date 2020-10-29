@@ -1,0 +1,11 @@
+{
+  "name": "camunda-cluster-worker",
+  "version": "0.1.0",
+  "description": "Cluster Node.js worker for Camunda",
+  "private": true,
+  "dependencies": {
+    "camunda-external-task-client-js": "~2.0.0",
+    "axios": "~0.20.0",
+    "faker": "~5.1.0"
+  }
+}
