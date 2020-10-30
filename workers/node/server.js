@@ -14,14 +14,14 @@ const { router } = require ('./js/router.js');
 //  Else Number of async threads = min (MaxTasks,maxParallelExcecutions)
 
 const url = process.env.CamundaUrl || 'http://camunda:8080/engine-rest';
-const timeout = process.env.ResponseTimeout || 10000;
+const longPolling = process.env.LongPolling || 60000;
 const tasktype = process.env.TaskType || 'service-task';
 const loglevel = process.env.LogLevel || 'INFO';
+const maxTasks = process.env.JobsToActivate || 25;
+const workerId = process.env.workerId || "some-random-id"
 
 // for fast parallel processing it is critical to reduse polling internal to low value (5ms)
-// + camunda recommends to set asyncBefore flag to set transaction save point before each external task (model)
-// On this example it works 3 times faster compared to default 10 thread + 300 ms interval
-const config = { baseUrl: url, use: logger.level(loglevel), asyncResponseTimeout: timeout, maxTasks: 200, interval: 5 };
+const config = { baseUrl: url, workerId: workerId, use: logger.level(loglevel), asyncResponseTimeout: longPolling, maxTasks: maxTasks, interval: 5 };
 
 // create a Client instance with custom configuration
 console.log('Camunda Node worker is starting...')

@@ -63,9 +63,10 @@ services:
       default:
     environment:
       - LogLevel=info
-      # cluster nginx gateway
       - CamundaUrl=http://camunda-engine1:8080/engine-rest
-      - ResponseTimeout=60000
+      - workerId=worker1
+      - JobsToActivate=25
+      - LongPolling=60000
       - TaskType=service-task
     volumes:
       - ./workers/node/server.js:/app/server.js
@@ -77,14 +78,15 @@ services:
     container_name: camunda-worker2
     restart: always
     depends_on:
-      - camunda-engine1
+      - camunda-engine2
     networks:
       default:
     environment:
       - LogLevel=info
-      # cluster nginx gateway
       - CamundaUrl=http://camunda-engine2:8080/engine-rest
-      - ResponseTimeout=60000
+      - workerId=worker1
+      - JobsToActivate=25
+      - LongPolling=60000
       - TaskType=service-task
     volumes:
       - ./workers/node/server.js:/app/server.js
