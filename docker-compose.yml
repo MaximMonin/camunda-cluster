@@ -84,7 +84,7 @@ services:
     environment:
       - LogLevel=info
       - CamundaUrl=http://camunda-engine2:8080/engine-rest
-      - workerId=worker1
+      - workerId=worker2
       - JobsToActivate=25
       - LongPolling=60000
       - TaskType=service-task
